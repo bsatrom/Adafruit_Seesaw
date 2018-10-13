@@ -8,15 +8,17 @@
     @brief  Class that stores state and functions for seesaw motor interface
 */
 /**************************************************************************/
-class seesaw_Motor {
+class seesaw_Motor
+{
 public:
-	 /**************************************************************************/
+	/**************************************************************************/
 	/*! 
 	  @brief  class constructor
 	  @param ss the seesaw object to use
 	*/
 	/**************************************************************************/
-	seesaw_Motor(Adafruit_seesaw *ss) {
+	seesaw_Motor(Adafruit_seesaw *ss)
+	{
 		_ss = ss;
 		_pina = -1;
 		_pinb = -1;
@@ -32,7 +34,8 @@ public:
 	  @param pinb the negative pin to use
 	*/
 	/**************************************************************************/
-	void attach(int pina, int pinb){
+	void attach(int pina, int pinb)
+	{
 		_pina = pina;
 		_pinb = pinb;
 	}
@@ -43,22 +46,27 @@ public:
 	  @param value the throttle value to set between -1 and 1. Passing 0 will turn the motor off.
 	*/
 	/**************************************************************************/
-	void throttle(float value){
-		if(_pina < 0 || _pinb < 0) return;
+	void throttle(float value)
+	{
+		if (_pina < 0 || _pinb < 0)
+			return;
 
 		value = constrain(value, -1.0, 1.0);
 		_throttle = value;
 		uint16_t absolute = abs(value) * 65535;
 
-		if(value > 0){
+		if (value > 0)
+		{
 			_ss->analogWrite(_pina, 0);
 			_ss->analogWrite(_pinb, absolute);
 		}
-		else if(value < 0){
+		else if (value < 0)
+		{
 			_ss->analogWrite(_pina, absolute);
 			_ss->analogWrite(_pinb, 0);
 		}
-		else{
+		else
+		{
 			//both are off
 			_ss->analogWrite(_pina, 0);
 			_ss->analogWrite(_pinb, 0);
@@ -71,7 +79,8 @@ public:
 	  @returns the current throttle value between -1 and 1
 	*/
 	/**************************************************************************/
-	float getThrottle(){
+	float getThrottle()
+	{
 		return _throttle;
 	}
 
