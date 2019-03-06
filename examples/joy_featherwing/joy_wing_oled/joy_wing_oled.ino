@@ -25,13 +25,10 @@ uint32_t button_mask = (1 << BUTTON_RIGHT) | (1 << BUTTON_DOWN) |
 #define IRQ_PIN 5
 #endif
 
-// For the breakout, you can use any 2 or 3 pins
-// These pins will also work for the 1.8" TFT shield
-#define TFT_CS 6
+#define TFT_CS D2
+#define TFT_DC D3
 #define TFT_RST 9 // you can also connect this to the Arduino reset \
                   // in which case, set this #define pin to -1!
-
-#define TFT_DC 10
 
 #define INITR_MINI160x80 0x04
 
